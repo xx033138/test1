@@ -40,38 +40,62 @@ class Baidu1(unittest.TestCase):
     #百度搜索用例
     def test_baidu_search1(self):
         u"""百度搜索2"""
-        driver = self.driver
-        driver.get(self.base_url )
-        time.sleep(2)
-        d=self.d
-        #driver.find_element_by_id("kw").send_keys("selenium webdriver1")
-        d.findId(driver,"kw").send_keys("selenium webdriver2")#调用封装的方法
-        time.sleep(2)
-        #driver.find_element_by_id("su").click()
-        d.findId(driver,"su").click()
-        time.sleep(3)
-        #driver.close()#这里如果有这行运行会出错，因为tearDown方法里面已有类似操作
+        try:
+            driver = self.driver
+            driver.get(self.base_url )
+            time.sleep(2)
+            d=self.d
+            #driver.find_element_by_id("kw").send_keys("selenium webdriver2")
+            d.findId(driver,"kw").send_keys("selenium webdriver2")#调用封装的方法
+            time.sleep(2)
+            #driver.find_element_by_id("su").click()
+            d.findId(driver,"su").click()
+            time.sleep(3)
+            #driver.close()#这里如果有这行运行会出错，因为tearDown方法里面已有类似操作
+        except Exception as ex:                                          #try语句执行异常才执行
+            print ex
+            #取前面时间
+            now = time.strftime("%Y-%m-%d-%H_%M_%S",time.localtime(time.time()))
+            driver.get_screenshot_as_file("D:\\autotest\\Python27\\test2\\screen\\" + now + "error_png.png")#截图屏幕
+            f=open("D:\\autotest\\Python27\\test2\\log\\log.txt",'a')  
+            f.write("\n" + now + str(ex))
+            f.write(u"错误截图:D:\\autotest\\Python27\\test2\\screen\\" + now + "error_png.png")  
+            #f.flush()  
+            f.close()
+            raise
 
     #百度设置用例    
     def test_baidu_set2(self):
         u"""百度设置2"""
-        driver = self.driver
-        #进入搜索设置页
-        driver.get(self.base_url + "/gaoji/preferences.html")
-        time.sleep(2)
-        d=self.d
-        #设置每页搜索结果为50 条
-        #m=driver.find_element_by_name("NR")
-        d.findName(driver,"NR")
-        time.sleep(2)
-        #m.find_element_by_xpath("//option[@value='50']").click()
-        d.findXpath(driver,"//option[@value='50']").click()
-        time.sleep(2)
-        #保存设置的信息
-        #driver.find_element_by_xpath("//input[@value='保存设置']").click()
-        d.findXpath(driver,"//input[@value='保存设置']").click()
-        time.sleep(2)
-        driver.switch_to_alert().accept()
+        try:
+            driver = self.driver
+            #进入搜索设置页
+            driver.get(self.base_url + "/gaoji/preferences.html")
+            time.sleep(2)
+            d=self.d
+            #设置每页搜索结果为50 条
+            #m=driver.find_element_by_name("NR")
+            d.findName(driver,"NR")
+            time.sleep(2)
+            #m.find_element_by_xpath("//option[@value='50']").click()
+            d.findXpath(driver,"//option[@value='50']").click()
+            time.sleep(2)
+            #保存设置的信息
+            #driver.find_element_by_xpath("//input[@value='保存设置']").click()
+            d.findXpath(driver,"//input[@value='保存设置2']").click()
+            time.sleep(2)
+            driver.switch_to_alert().accept()
+        except Exception as ex:                                          #try语句执行异常才执行
+            print ex
+            #取前面时间
+            now = time.strftime("%Y-%m-%d-%H_%M_%S",time.localtime(time.time()))
+            driver.get_screenshot_as_file("D:\\autotest\\Python27\\test2\\screen\\" + now + "error_png.png")#截图屏幕
+            f=open("D:\\autotest\\Python27\\test2\\log\\log.txt",'a')  
+            f.write("\n" + now + str(ex))
+            f.write(u"错误截图:D:\\autotest\\Python27\\test2\\screen\\" + now + "error_png.png")  
+            #f.flush()  
+            f.close()
+            raise
     
     def tearDown(self):
         self.driver.quit()

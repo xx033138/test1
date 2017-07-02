@@ -3,7 +3,8 @@ data：目录用于存放参数化的数据；
 report：目录用于存放测试报告;
 all_case.py：文件执行 test_case 目录中的测试用例;用例读取原则：先同级目录用例，然后__init__.py指定的用例。
 __init__.py：test_case和其下的public目录下的这个文件用于指定all_case.py运行哪些测试用例。
-
+log:错误日志记录；
+screen:错误截屏。
 
 
 
